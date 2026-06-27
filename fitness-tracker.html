@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #22c55e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    nav {
+      text-align: center;
+      background-color: #16a34a;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      color: #22c55e;
+      margin-top: 0;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .stat {
+      background-color: #e6f4ea;
+      padding: 20px;
+      border-radius: 12px;
+      width: 30%;
+    }
+
+    .stat h3 {
+      margin: 0 0 10px 0;
+      color: #16a34a;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #22c55e;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background-color: #16a34a;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Fitness Tracker</h1>
+    <p>Track your workouts, steps, and calories</p>
+  </header>
+
+  <nav>
+    <a href="#workouts">Workouts</a>
+    <a href="#stats">Stats</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <!-- Workouts Section -->
+    <section id="workouts" class="card">
+      <h2>Today's Workouts</h2>
+      <ul>
+        <li>🏃‍♂️ Running – 5 km</li>
+        <li>💪 Push-ups – 50 reps</li>
+        <li>🏋️‍♂️ Weight Lifting – 30 mins</li>
+        <li>🧘 Yoga – 20 mins</li>
+      </ul>
+      <a href="#" class="btn">Add Workout</a>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="card">
+      <h2>Stats Overview</h2>
+      <div class="stats">
+        <div class="stat">
+          <h3>Steps</h3>
+          <p>8,500</p>
+        </div>
+        <div class="stat">
+          <h3>Calories</h3>
+          <p>450 kcal</p>
+        </div>
+        <div class="stat">
+          <h3>Workout Time</h3>
+          <p>1h 20m</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="card">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:inamdarimran794@gmail.com">inamdarimran794@gmail.com</a></p>
+      <a href="#" class="btn">Send a Message</a>
+    </section>
+
+  </main>
+
+</body>
+</html>

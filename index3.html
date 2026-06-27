@@ -1,0 +1,194 @@
+ <!-- ================== Projects Section ================== -->
+<section id="projects" class="projects-section">
+  <h2 class="section-title">🚀 My Projects</h2>
+  <p class="section-subtitle">A collection of my best work, built with passion and code.</p>
+
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="web">Web</button>
+    <button class="filter-btn" data-filter="mobile">Mobile</button>
+    <button class="filter-btn" data-filter="ai">AI/ML</button>
+  </div>
+
+  <!-- Project Cards -->
+  <div class="projects-grid">
+    <!-- Project 1 -->
+    <div class="project-card" data-category="web">
+      <div class="card-front">
+        <img src="project1.jpg" alt="Portfolio Website">
+        <h3>Portfolio Website</h3>
+      </div>
+      <div class="card-back">
+        <p>A personal portfolio website showcasing my skills, projects, and achievements.</p>
+        <span class="badge">HTML</span>
+        <span class="badge">CSS</span>
+        <span class="badge">JavaScript</span>
+        <a href="#" class="project-link" target="_blank">🔗 View Project</a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card" data-category="mobile">
+      <div class="card-front">
+        <img src="project2.jpg" alt="Food Delivery App">
+        <h3>Food Delivery App</h3>
+      </div>
+      <div class="card-back">
+        <p>A mobile app for food ordering and delivery with live tracking system.</p>
+        <span class="badge">Flutter</span>
+        <span class="badge">Firebase</span>
+        <a href="#" class="project-link" target="_blank">🔗 View Project</a>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card" data-category="ai">
+      <div class="card-front">
+        <img src="project3.jpg" alt="AI Chatbot">
+        <h3>AI Chatbot</h3>
+      </div>
+      <div class="card-back">
+        <p>An intelligent chatbot powered by NLP and machine learning models.</p>
+        <span class="badge">Python</span>
+        <span class="badge">TensorFlow</span>
+        <span class="badge">Flask</span>
+        <a href="#" class="project-link" target="_blank">🔗 View Project</a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  /* ===== Projects Section ===== */
+.projects-section {
+  padding: 80px 10%;
+  background: #0d1117;
+  color: #fff;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 40px;
+}
+
+.filter-buttons {
+  margin-bottom: 30px;
+}
+.filter-btn {
+  background: #161b22;
+  color: #fff;
+  border: none;
+  margin: 5px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: #238636;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Project Card */
+.project-card {
+  perspective: 1000px;
+  position: relative;
+  height: 350px;
+  cursor: pointer;
+}
+.project-card .card-front, 
+.project-card .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease-in-out;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+.project-card .card-front {
+  background: #161b22;
+  overflow: hidden;
+}
+.project-card .card-front img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+}
+.project-card .card-front h3 {
+  margin-top: 10px;
+}
+
+.project-card .card-back {
+  background: #238636;
+  color: #fff;
+  transform: rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+}
+.project-card:hover .card-front {
+  transform: rotateY(180deg);
+}
+.project-card:hover .card-back {
+  transform: rotateY(360deg);
+}
+
+/* Badges */
+.badge {
+  background: rgba(0,0,0,0.2);
+  padding: 5px 10px;
+  border-radius: 12px;
+  margin: 5px;
+  display: inline-block;
+  font-size: 0.8rem;
+}
+
+/* Project Link */
+.project-link {
+  margin-top: 10px;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.project-link:hover {
+  text-decoration: underline;
+}
+
+</style>
+<script>
+  // Project Filtering
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const projects = document.querySelectorAll(".project-card");
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const category = btn.getAttribute("data-filter");
+
+      projects.forEach(project => {
+        project.style.display = 
+          category === "all" || project.getAttribute("data-category") === category 
+            ? "block" 
+            : "none";
+      });
+    });
+  });
+</script>

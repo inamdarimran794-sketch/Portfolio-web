@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Portfolio • Imran</title>
+    <meta
+      name="description"
+      content="Student portfolio for projects, skills, and achievements."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #000000; /* dark base */
+        --panel: #000000; /* dark surface */
+        --text: #0594f4; /* light text */
+        --muted: #46bade; /* muted text */
+        --brand: #7c5cff; /* accent */
+        --brand-2: #16c9e4; /* secondary accent */
+        --ring: rgba(109, 74, 246, 0.4);
+        --card: #0f1115;
+        --ok: #22c55e;
+        --warn: #f59e0b;
+        --err: #ef4444;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+      :root.light {
+        --bg: #f7f9fc;
+        --panel: #ffffff;
+        --text: #2186fa;
+        --muted: #475569;
+        --brand: #6d28d9;
+        --brand-2: #0891b2;
+        --ring: rgba(119, 43, 241, 0.25);
+        --card: #ffffff;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08),
+          0 2px 10px rgba(1, 17, 85, 0.06);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+        scroll-behavior: smooth;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .container {
+        max-width: 1100px;
+        margin-inline: auto;
+        padding: 0 20px;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: saturate(180%) blur(8px);
+        background: color-mix(in oklab, var(--bg) 80%, transparent);
+        border-bottom: 1px solid
+          color-mix(in oklab, var(--text) 15%, transparent);
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0;
+      }
+      .nav-links {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        padding: 8px 12px;
+        border: 1px solid color-mix(in oklab, var(--text) 20%, transparent);
+        border-radius: 999px;
+        font-size: 14px;
+        opacity: 0.9;
+      }
+      .chip:hover {
+        border-color: color-mix(in oklab, var(--brand) 60%, transparent);
+        box-shadow: 0 0 0 6px var(--ring);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        color: white;
+        border: none;
+        font-weight: 600;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+      }
+      .btn.ghost {
+        background: transparent;
+        color: var(--text);
+        border: 1px dashed color-mix(in oklab, var(--text) 25%, transparent);
+      }
+      .btn.small {
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      @media (max-width: 900px) {
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Hero */
+      .hero {
+        padding: 56px 0 28px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid color-mix(in oklab, var(--text) 15%, transparent);
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+      .hero .left {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .kicker {
+        font-size: 14px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      h1 {
+        font-size: clamp(28px, 5vw + 1rem, 48px);
+        line-height: 1.1;
+        margin: 0;
+      }
+      p.lead {
+        font-size: clamp(16px, 0.7vw + 0.8rem, 20px);
+        color: var(--muted);
+      }
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 24px;
+        object-fit: cover;
+        border: 2px solid color-mix(in oklab, var(--brand) 30%, transparent);
+      }
+
+      /* Sections */
+      section {
+        padding: 28px 0;
+      }
+      h2 {
+        margin: 0 0 12px;
+        font-size: 30px;
+      }
+      .sub {
+        color: var(--muted);
+        margin-top: -6px;
+      }
+
+      /* Cards */
+      .project {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .project img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 16px;
+        border: 1px solid color-mix(in oklab, var(--text) 15%, transparent);
+      }
+      .project h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+      .badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid color-mix(in oklab, var(--text) 20%, transparent);
+        color: var(--muted);
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding-left: 22px;
+      }
+      .timeline:before {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: color-mix(in oklab, var(--text) 20%, transparent);
+      }
+      .dot {
+        position: absolute;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        box-shadow: 0 0 0 4px var(--ring);
+      }
+      .entry {
+        position: relative;
+        padding-left: 12px;
+        margin: 14px 0;
+      }
+
+      /* Footer */
+      footer {
+        padding: 40px 0 60px;
+        color: var(--muted);
+      }
+
+      /* Util */
+      .row {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .spacer {
+        height: 28px;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .kbd {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        background: color-mix(in oklab, var(--text) 10%, transparent);
+        padding: 3px 6px;
+        border-radius: 6px;
+        border: 1px solid color-mix(in oklab, var(--text) 20%, transparent);
+      }
+    </style>
+    <script>
+      // Theme preference
+      const applyStoredTheme = () => {
+        const pref =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark");
+        document.documentElement.classList.toggle("light", pref === "light");
+        const label = document.getElementById("theme-label");
+        if (label) label.textContent = pref === "light" ? "Dark" : "Light";
+        const emoji = document.getElementById("theme-emoji");
+        if (emoji) emoji.textContent = pref === "light" ? "🌙" : "☀️";
+      };
+      document.addEventListener("DOMContentLoaded", applyStoredTheme);
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle("light");
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        applyStoredTheme();
+      }
+      // Copy email
+      async function copyEmail() {
+        const el = document.getElementById("email");
+        if (!el) return;
+        try {
+          await navigator.clipboard.writeText(el.dataset.value);
+          toast("Email copied to clipboard");
+        } catch {
+          toast("Could not copy email");
+        }
+      }
+      // Simple toast
+      function toast(msg) {
+        const t = document.createElement("div");
+        t.textContent = msg;
+        t.setAttribute("role", "status");
+        t.style.cssText =
+          "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);padding:10px 14px;border-radius:12px;background:var(--panel);color:var(--text);border:1px solid color-mix(in oklab, var(--text) 20%, transparent);box-shadow:var(--shadow);z-index:100";
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 1800);
+      }
+      // Form handler (demo)
+      function submitForm(e) {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target).entries());
+        console.log("Form submission (demo):", data);
+        e.target.reset();
+        toast("Thanks! I will get back to you.");
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <div class="row" aria-label="Brand">
+            <img
+              src="https://1drv.ms/i/c/d48e523a037b9b30/EXd7yaJfs3NLtB8kXkG_vuoBxpu7Hs5CFa1qZlhCcryRiw?e=wceCPi"
+              alt="Logo"
+              width="30"
+              height="28"
+              style="
+                border-radius: 8px;
+                border: 1px solid
+                  color-mix(in oklab, var(--text) 20%, transparent);
+              "
+            />
+            <strong>Imran</strong>
+            <span class="kbd">B.Tech IT</span>
+          </div>
+          <div class="nav-links" role="navigation" aria-label="Primary">
+            <a class="chip" href="#about">About</a>
+            <a class="chip" href="#skills">Skills</a>
+            <a class="chip" href="#projects">Projects</a>
+            <a class="chip" href="#education">Education</a>
+            <a class="chip" href="#contact">Contact</a>
+            <button
+              class="btn small ghost"
+              onclick="toggleTheme()"
+              aria-label="Toggle theme"
+            >
+              <span id="theme-emoji" aria-hidden="true">☀️</span>
+              <span id="theme-label">Light</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container hero">
+        <div class="grid grid-2">
+          <div class="left card">
+            <span class="kicker">Hello! I'm</span>
+            <h1>Imran Inamdar</h1>
+            <p class="lead">
+              B.Tech in Information Technology (2022–2026) • Full‑Stack
+              Developer • Open‑Source Enthusiast
+            </p>
+            <div class="row">
+              <a
+                class="btn"
+                href="https://www.linkedin.com/in/imran-inamdar-ab92a4285?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BBWo5C0pPRXGIsKlcF5O6kw%3D%3D"
+                target="_blank"
+                rel="noreferrer"
+                >Connect on LinkedIn</a
+              >
+              <a
+                class="btn ghost"
+                href="./resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                >Download Résumé</a
+              >
+              <button
+                class="btn ghost"
+                id="email"
+                data-value="inamdarimran794@gmail.com"
+                onclick="copyEmail()"
+                aria-label="Copy email"
+              >
+                Copy Email
+              </button>
+            </div>
+            <div class="row" aria-label="Quick stats">
+              <span class="badge">GPA: 8.8/10</span>
+              <span class="badge">Location: Wagholi,Pune, IN</span>
+              <span class="badge">Open to Internships</span>
+            </div>
+          </div>
+          <div
+            class="card"
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <img
+              class="avatar"
+              src="https://1drv.ms/i/c/d48e523a037b9b30/EXd7yaJfs3NLtB8kXkG_vuoBxpu7Hs5CFa1qZlhCcryRiw?e=6zeoNS"
+              alt="Your profile photo"
+            />
+          </div>
+        </div>
+      </div>
+
+      <section id="about">
+        <div class="container grid grid-2">
+          <div class="card">
+            <h2>About</h2>
+            <p class="sub">A Short intro Myself.</p>
+            <p>
+              I'm a Second-Year IT student passionate about building useful
+              products. I enjoy designing clean UIs, crafting reliable backends,
+              and learning by doing. Recently I’ve been exploring cloud
+              deployments and performance optimization.
+            </p>
+            <p>
+              Currently looking for a summer internship where I can contribute
+              to full‑stack features, improve developer experience, and ship
+              delightful experiences.
+            </p>
+          </div>
+          <div class="card">
+            <h2>Highlights</h2>
+            <ul>
+              <li>🏆 Smart India Hackathon finalist (2024)</li>
+              <li>🧑‍💻 200+ DSA problems solved</li>
+              <li>🔧 Contributed to 3 open‑source repos</li>
+              <li>🌐 Built and deployed 6+ web apps</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="container">
+          <div class="card">
+            <h2>Skills</h2>
+            <p class="sub">Technologies I work with</p>
+            <div class="badges" aria-label="Technical skills">
+              <span class="badge">C</span>
+              <span class="badge">C++</span>
+              <span class="badge">Python</span>
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+              <span class="badge">JavaScript</span>
+              <span class="badge">Node.js</span>
+              <span class="badge">MongoDB</span>
+              <span class="badge">PostgreSQL</span>
+              <span class="badge">Git & GitHub</span>
+              <span class="badge">Docker</span>
+              <span class="badge">Linux</span>
+            </div>
+            <div class="spacer"></div>
+            <div class="grid grid-3">
+              <div class="card">
+                <strong>Full‑Stack</strong>
+                <p class="sub">Web • Node • REST</p>
+                <p>
+                  Build responsive SPAs, design REST APIs, handle auth, and
+                  deploy to cloud.
+                </p>
+              </div>
+              <div class="card">
+                <strong>CS Fundamentals</strong>
+                <p class="sub">DSA • OOP • DBMS</p>
+                <p>
+                  Write clean, efficient code; design relational schemas;
+                  analyze time/space trade‑offs.
+                </p>
+              </div>
+              <div class="card">
+                <strong>Tooling</strong>
+                <p class="sub">Git • CI/CD • Docker</p>
+                <p>
+                  Version control, automated testing, and containerized
+                  deployments for reliability.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- ================== Projects Section (Carousel Style) ================== -->
+<section id="projects" class="projects-carousel">
+  <h2 class="section-title">💡 Featured Projects</h2>
+  <p class="section-subtitle">Swipe through some of my highlighted work.</p>
+
+  <div class="carousel-container">
+    <button class="carousel-btn prev">❮</button>
+    <div class="carousel-track" id="carousel-track"></div>
+    <button class="carousel-btn next">❯</button>
+    <script>
+const projectsCarousel = [
+  {
+    title: "Weather Forecast App",
+    img: "proj-weather.jpg",
+    desc: "Real-time weather updates with a clean UI.",
+    link: "#"
+  },
+  {
+    title: "E-Learning Platform",
+    img: "proj-elearning.jpg",
+    desc: "Online education with quizzes, videos & progress tracking.",
+    link: "#"
+  },
+  {
+    title: "Fitness Tracker",
+    img: "proj-fitness.jpg",
+    desc: "Mobile app for workout tracking & diet management.",
+    link: "#"
+  },
+  {
+    title: "Crypto Dashboard",
+    img: "proj-crypto.jpg",
+    desc: "Live cryptocurrency market analytics dashboard.",
+    link: "#"
+  },
+  {
+    title: "AI Image Generator",
+    img: "proj-ai.jpg",
+    desc: "Generates digital artwork using AI prompts.",
+    link: "#"
+  }
+];
+
+const track = document.getElementById("carousel-track");
+
+// Render Slides
+projectsCarousel.forEach(p => {
+  track.innerHTML += `
+    <div class="project-slide">
+      <img src="${p.img}" alt="${p.title}">
+      <div class="project-info">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <a href="${p.link}" class="project-link" target="_blank">🔗 View Project</a>
+      </div>
+    </div>
+  `;
+});
+
+// Carousel Logic
+let index = 0;
+const slidesToShow = 3; // how many visible at once
+const slideWidth = 345; // width + margin
+
+document.querySelector(".next").addEventListener("click", () => {
+  if (index < projectsCarousel.length - slidesToShow) index++;
+  track.style.transform = `translateX(-${index * slideWidth}px)`;
+});
+
+document.querySelector(".prev").addEventListener("click", () => {
+  if (index > 0) index--;
+  track.style.transform = `translateX(-${index * slideWidth}px)`;
+});
+</script>
+  </div>
+</section>
+<style>
+  /* ===== Projects Carousel Section ===== */
+.projects-carousel {
+  padding: 80px 8%;
+  background: #0a0f1c;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2.3rem;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 40px;
+}
+
+/* Carousel Layout */
+.carousel-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 25px;
+  transition: transform 0.5s ease;
+}
+
+/* Project Card */
+.project-slide {
+  min-width: 320px;
+  background: #161b22;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+.project-slide:hover {
+  transform: scale(1.05);
+}
+.project-slide img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.project-info {
+  padding: 15px;
+  text-align: left;
+}
+.project-info h3 {
+  margin: 5px 0;
+  font-size: 1.3rem;
+}
+.project-info p {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+.project-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #58a6ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.project-link:hover {
+  text-decoration: underline;
+}
+
+/* Carousel Buttons */
+.carousel-btn {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 15px;
+  border-radius: 50%;
+  margin: 0 10px;
+  transition: background 0.3s ease;
+  z-index: 10;
+}
+.carousel-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+</style>
+
+
+
+      <section id="education">
+        <div class="container grid grid-2">
+          <div class="card">
+            <h2>Education</h2>
+            <div class="timeline">
+              <div class="entry">
+                <span class="dot" style="top: 6px"></span>
+                <strong>B.Tech in Information Technology</strong>
+                <p class="sub">Savitrybai Phule University • 2025 – 2028</p>
+                <p>
+                  Relevant Coursework: Data Structures, Algorithms, DBMS, OS,
+                  Computer Networks, Web Development.
+                </p>
+              </div>
+              <div class="entry">
+                <span class="dot" style="top: 2px"></span>
+                <strong>12th • Science</strong>
+                <p class="sub">
+                  Maharaja Jivajirao Shinde Mahavidyalay Shrigonda • 2024 – 2025
+                </p>
+                <p>PCM with Computer Science. Percentage: 60.50%.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>Experience</h2>
+            <div class="timeline">
+              <div class="entry">
+                <span class="dot" style="top: 6px"></span>
+                <strong>Web Development Intern</strong>
+                <p class="sub">Startup XYZ • May – Jul 2024</p>
+                <ul>
+                  <li>
+                    Built a dashboard that reduced page load by 40% using
+                    code‑splitting.
+                  </li>
+                  <li>Implemented JWT auth and role‑based access control.</li>
+                </ul>
+              </div>
+              <div class="entry">
+                <span class="dot" style="top: 6px"></span>
+                <strong>Open‑Source Contributor</strong>
+                <p class="sub">GitHub • 2025 – Present</p>
+                <ul>
+                  <li>Fixed bugs and improved docs for community projects.</li>
+                  <li>Maintained CI pipelines with automated tests.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container grid grid-2">
+          <div class="card">
+            <h2>Contact</h2>
+            <p class="sub">Have an opportunity or feedback? Let's talk.</p>
+            <form onsubmit="submitForm(event)" aria-label="Contact form">
+              <div class="grid">
+                <label>
+                  Name <br /><input
+                    required
+                    name="name"
+                    placeholder="Your name"
+                    style="
+                      width: 100%;
+                      padding: 12px 14px;
+                      border-radius: 12px;
+                      border: 1px solid
+                        color-mix(in oklab, var(--text) 20%, transparent);
+                      background: var(--panel);
+                      color: var(--text);
+                    "
+                /></label>
+                <label>
+                  Email <br /><input
+                    required
+                    type="email"
+                    name="email"
+                    placeholder="name@email.com"
+                    style="
+                      width: 100%;
+                      padding: 12px 14px;
+                      border-radius: 12px;
+                      border: 1px solid
+                        color-mix(in oklab, var(--text) 20%, transparent);
+                      background: var(--panel);
+                      color: var(--text);
+                    "
+                /></label>
+                <label>
+                  Message <br /><textarea
+                    required
+                    name="message"
+                    rows="5"
+                    placeholder="Write your message..."
+                    style="
+                      width: 100%;
+                      padding: 12px 14px;
+                      border-radius: 12px;
+                      border: 1px solid
+                        color-mix(in oklab, var(--text) 20%, transparent);
+                      background: var(--panel);
+                      color: var(--text);
+                    "
+                  ></textarea>
+                </label>
+              </div>
+              <div class="spacer"></div>
+              <button class="btn" type="submit">Send Message</button>
+              <p class="sub">
+                This demo form logs to console. Connect it to
+                Formspree/Netlify/EmailJS to receive messages.
+              </p>
+            </form>
+          </div>
+          <div class="card">
+            <h2>Links</h2>
+            <ul>
+              <li>
+                💼
+                <a
+                  href="https://www.linkedin.com/in/imran-inamdar-ab92a4285?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B%2BmB7kjAjQyCOz5bjpsMRcA%3D%3D"
+                  target="_blank"
+                  rel="noreferrer"
+                  >LinkedIn</a
+                >
+              </li>
+              <li>
+                🧑‍💻
+                <a href="https://github.com/" target="_blank" rel="noreferrer"
+                  >GitHub</a
+                >
+              </li>
+              <li>
+                ✉️
+                <a href="mailto:inamdarimran794@gmail.com"
+                  >your.email@example.com</a
+                >
+              </li>
+              <li>
+                📄
+                <a href="./resume.pdf" target="_blank" rel="noreferrer"
+                  >Download Résumé</a
+                >
+              </li>
+            </ul>
+            <div class="spacer"></div>
+            <h2>Achievements</h2>
+            <ul>
+              <li>
+                🏅 Winner, CodeSprint 2025 – Built real‑time quiz platform.
+              </li>
+              <li>📚 Published blog on database indexing performance.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container row" style="justify-content: space-between">
+        <span>© <span id="year"></span> Your Name</span>
+        <span
+          >Made with ♥ • <span class="kbd">HTML</span>
+          <span class="kbd">CSS</span> <span class="kbd">JS</span></span
+        >
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <!-- JSON‑LD for richer search results -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Your Name",
+        "url": "https://your-domain.com/",
+        "sameAs": [
+          "https://github.com/your-username",
+          "https://www.linkedin.com/in/your-handle"
+        ],
+        "jobTitle": "Student • Full‑Stack Developer",
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "SPPU" }
+      }
+    </script>
+  </body>
+</html>
